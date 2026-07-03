@@ -70,6 +70,7 @@
         <option>Veteran / on behalf of a veteran</option>
         <option>Person with a disability / caregiver</option>
         <option>Reentry or community partner</option>
+          <option>Donor / I want to fund builds</option>
         <option>Other</option>
       </select>
     </div>
@@ -198,6 +199,26 @@
       btn.disabled = false; btn.textContent = 'Submit My Request';
     }
   });
+</script>
+
+<script>
+  (function () {
+    const params = new URLSearchParams(window.location.search);
+    const type = params.get('type');
+    const sel = document.querySelector('select[name=requester_type]');
+    const h1 = document.querySelector('h1');
+    const intro = h1 ? h1.nextElementSibling : null;
+    if (type === 'referral' && sel) {
+      sel.value = 'Reentry or community partner';
+      if (h1) h1.textContent = 'Refer a Candidate';
+      if (intro) intro.textContent = "Tell us about the person you'd like to refer — their name in the description, their situation, and why they're ready to work. We'll reach out to coordinate.";
+    }
+    if (type === 'donor' && sel) {
+      sel.value = 'Donor / I want to fund builds';
+      if (h1) h1.textContent = 'Support a Build';
+      if (intro) intro.textContent = "Our first-build fundraiser launches soon. Leave your contact info and what you'd like to support, and you'll be the first to know when it goes live — every dollar restores a building and writes someone's second story.";
+    }
+  })();
 </script>
 </body>
 </html>
